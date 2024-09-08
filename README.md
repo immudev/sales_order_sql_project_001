@@ -93,7 +93,7 @@ SELECT * FROM sales_order;
 
 The following SQL queries were developed to answer specific business questions:
 
-1. **Identify the total no of products sold
+1. Identify the total no of products sold
 
 ```sql
 select sum(quantity) as total_sold_products
@@ -101,7 +101,7 @@ from sales_order;
 ```
 
 
-2. **Other than Completed, display the available delivery status's.
+2. Other than Completed, display the available delivery status's.
 
 ```sql
 SELECT status
@@ -114,7 +114,7 @@ WHERE LOWER(status) <> 'completed';
 ```
 
 
-3. **Display the order id, order_date and product_name for all the completed orders.
+3. Display the order id, order_date and product_name for all the completed orders.
 
 ```sql
 SELECT order_id, order_date, name
@@ -124,7 +124,7 @@ WHERE LOWER(status) = 'completed'
 ```
 
 
-4. **Sort the above query to show the earliest orders at the top. Also display the customer who purchased these orders.
+4. Sort the above query to show the earliest orders at the top. Also display the customer who purchased these orders.
 
 ```sql
 SELECT order_id, order_date, p.name AS product_name, c.name AS customer_name
@@ -136,7 +136,7 @@ ORDER BY order_date
 ```
 
 
-5. **Display the total no of orders corresponding to each delivery status
+5. Display the total no of orders corresponding to each delivery status
 
 ```sql
 SELECT status, COUNT(*) AS total_order
@@ -145,7 +145,7 @@ GROUP BY status
 ```
 
 
-6. **For orders purchasing more than 1 item, how many are still not completed?
+6. For orders purchasing more than 1 item, how many are still not completed?
 
 ```sql
 SELECT COUNT(*)
@@ -155,7 +155,7 @@ AND LOWER(status) <> 'completed'
 ```
 
 
-7. **Find the total no of orders corresponding to each delivery status by ignoring the case in delivery status.Status with highest no of orders should be at the top.
+7. Find the total no of orders corresponding to each delivery status by ignoring the case in delivery status.Status with highest no of orders should be at the top.
 
 ```sql
 SELECT LOWER(status) as status, COUNT(*) AS total_order
@@ -176,7 +176,7 @@ ORDER BY total_order DESC
 ```
 
 
-8. **Write a query to identify the total products purchased by each customer
+8. Write a query to identify the total products purchased by each customer
 
 ```sql
 SELECT c.name as customer_name, SUM(so.quantity) AS total_purchase_product
@@ -186,7 +186,7 @@ GROUP BY c.name
 ```
 
 
-9. **Display the total sales and average sales done for each day.
+9. Display the total sales and average sales done for each day.
 
 ```sql
 SELECT order_date, SUM(quantity * price), AVG(quantity *price)
@@ -197,7 +197,7 @@ ORDER BY order_date
 ```
 
 
-10. **Display the customer name, employee name and total sale amount of all orders which are either on hold or  pending
+10. Display the customer name, employee name and total sale amount of all orders which are either on hold or  pending
 
 ```sql
 SELECT c.name as customer_name, e.name as employee_name, SUM(so.quantity * p.price), so.status
@@ -210,7 +210,7 @@ GROUP BY c.name, e.name
 ```
 
 
-11. **Fetch all the orders which were neither completed/pending or were handled by the employee Abrar. Display employee name and all details of order.
+11. Fetch all the orders which were neither completed/pending or were handled by the employee Abrar. Display employee name and all details of order.
 
 ```sql
 SELECT e.name as employee_name, so.*
@@ -221,7 +221,7 @@ OR LOWER(e.name) LIKE '%abrar%'
 ```
 
 
-12. **Fetch the orders which cost more than 2000 but did not include the macbook pro. Print the total sale amount as well.
+12. Fetch the orders which cost more than 2000 but did not include the macbook pro. Print the total sale amount as well.
 
 ```sql
 SELECT so.*, p.name, (quantity * price) as total_Sale
@@ -232,7 +232,7 @@ AND LOWER(p.name) NOT LIKE '%macbook%'
 ```
 
 
-13. **Identify the customers who have not purchased any product yet
+13. Identify the customers who have not purchased any product yet
 
 ```sql
 SELECT * from customers
@@ -246,7 +246,7 @@ WHERE order_id ISNULL
 ```
 
 
-14. **Write a query to identify the total products purchased by each customer.Return all customers irrespective of wether they have made a purchase or not. Sort the result with highest no of orders at the top.
+14. Write a query to identify the total products purchased by each customer.Return all customers irrespective of wether they have made a purchase or not. Sort the result with highest no of orders at the top.
 
 ```sql
 SELECT c.name, COALESCE(SUM(quantity), 0) AS total_products_purchased
@@ -257,7 +257,7 @@ ORDER BY total_products_purchased DESC
 ```
 
 
-15. **Corresponding to each employee, display the total sales they made of all the completed orders. Display total sales as 0 if an employee made no sales yet.
+15. Corresponding to each employee, display the total sales they made of all the completed orders. Display total sales as 0 if an employee made no sales yet.
 
  ```sql
 SELECT e.name,  COALESCE(SUM(quantity * price),0) AS total_sales
@@ -269,7 +269,7 @@ GROUP BY e.name
 ```
 
 
-16. **Re-write the above query so as to display the total sales made by each employee corresponding to each customer. If an employee has not served a customer yet then display "-" under the customer.
+16. Re-write the above query so as to display the total sales made by each employee corresponding to each customer. If an employee has not served a customer yet then display "-" under the customer.
 
 ```sql
 SELECT e.name, COALESCE(c.name, '-'), COALESCE(SUM(quantity * price),0) AS total_sales
@@ -283,7 +283,7 @@ ORDER BY 1,2
 ```
 
 
-17. **Re-write above query so as to display only those records where the total sales is above 1000
+17. Re-write above query so as to display only those records where the total sales is above 1000
 
 ```sql
 SELECT e.name, COALESCE(c.name, '-'), COALESCE(SUM(quantity * price),0) AS total_sales
@@ -298,7 +298,7 @@ ORDER BY 1,2
 ```
 
 
-18. **Identify employees who have served more than 2 customer.
+18. Identify employees who have served more than 2 customer.
 
 ```sql
 SELECT e.name as employee, COUNT(DISTINCT c.name) as customer
@@ -311,7 +311,7 @@ ORDER BY 1
 ```
 
 
-19. **Identify the customers who have purchased more than 5 products
+19. Identify the customers who have purchased more than 5 products
 
 ```sql
 SELECT c.name AS customer, SUM(quantity) as total_products
@@ -322,7 +322,7 @@ HAVING SUM(quantity) > 5
 ```
 
 
-20. **Identify customers whose average purchase cost exceeds the average sale of all the orders
+20. Identify customers whose average purchase cost exceeds the average sale of all the orders
 
 ```sql
 SELECT c.name, AVG(quantity * price)
