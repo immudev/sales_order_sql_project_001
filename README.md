@@ -18,10 +18,10 @@ CREATE DATABASE sales_order;
 drop table if exists products;
 create table products
 (
-	id				int generated always as identity primary key,
+	id			int generated always as identity primary key,
 	name			varchar(100),
 	price			float,
-	release_date 	date
+	release_date 		date
 );
 insert into products values(default,'iPhone 15', 800, to_date('22-08-2023','dd-mm-yyyy'));
 insert into products values(default,'Macbook Pro', 2100, to_date('12-10-2022','dd-mm-yyyy'));
